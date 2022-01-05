@@ -7,11 +7,11 @@ namespace Luluco.MVVM.ViewModel
 {
     class MainViewModel: ObservableObject
     {
-        public RelayCommands HomeViewCommand { get; set; }
-        public RelayCommands DiscoverViewCommand { get; set; }
+        public RelayCommands TemplateViewCommand { get; set; }
+        public RelayCommands VariableViewCommand { get; set; }
 
-        public HomeViewModel HomeVM { get; set; }
-        public DiscoverViewModel DiscoverVM { get; set; }
+        public TemplateModel TemplateVM { get; set; }
+        public VariableViewModel VariableVM { get; set; }
 
         private object _currentView;
         public object CurrentView
@@ -26,20 +26,23 @@ namespace Luluco.MVVM.ViewModel
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
-            DiscoverVM = new DiscoverViewModel();
+            TemplateVM = new TemplateModel();
+            VariableVM = new VariableViewModel();
 
-            CurrentView = HomeVM;
+            VariableVM.LoadData();
+            TemplateVM.LoadData();
+            //CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommands(o => 
-            {
-                CurrentView = HomeVM;
-            });
+            //TemplateViewCommand = new RelayCommands(o => 
+            //{
+            //    CurrentView = HomeVM;
+            //});
 
-            DiscoverViewCommand = new RelayCommands(o =>
-            {
-                CurrentView = DiscoverVM;
-            });
+            //VariableViewCommand = new RelayCommands(o =>
+            //{
+            //    CurrentView = DiscoverVM;
+            //});
+
 
 
         }

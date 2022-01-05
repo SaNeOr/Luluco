@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="Luluco.MVVM.View.VariableView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Luluco.MVVM.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.DataContext>
+        <!--<local:VariableViewModel/>-->
+        <local:MainViewModel/>
+    </UserControl.DataContext>
+
+
+    <StackPanel HorizontalAlignment="Left">
+        <StackPanel>
+                <Label>Keywords:</Label>
+            <!--<StackPanel Orientation="Horizontal">
+                <TextBox x:Name="TempKeyWord"
+                    Text ="{Binding VariableVM.TempStr, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Style="{StaticResource VariableTextbox}"
+                    />
+            </StackPanel>-->
+        </StackPanel>
+
+
+        <ScrollViewer Height="250" HorizontalScrollBarVisibility="Disabled">
+            <StackPanel x:Name="OtherVariables" Height="380">
+                <Label>Others:</Label>
+                <ListBox x:Name="ListBox_Variable" Background="Transparent"
+                ItemsSource="{Binding VariableVM.Variabledict}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Background="Transparent" Text="{Binding Key, Mode=TwoWay}" Style="{StaticResource VariableTextBox4Key  }"/>
+                                <TextBox Background="Transparent" Text="{Binding Value, Mode=TwoWay}"  Style="{StaticResource VariableTextBox4Value  }"/>
+                                <Button Margin="10,0,0,0" Width="45" Click="Button_Click_Delete"/> 
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+
+                <!--<RadioButton Content="HeroID"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            <RadioButton Content="HeroName"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
+
+            <RadioButton Content="HeroRomajiName"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>-->
+            </StackPanel>
+        </ScrollViewer>
+        <Button
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Margin="50,10,0,0"
+            Height="50"
+            Width="200"
+            Content="Add"
+            Click="Button_Click_Add"
+            />
+    </StackPanel>
+</UserControl>

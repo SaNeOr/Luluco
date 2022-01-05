@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Luluco.MVVM.ViewModel;
+
 namespace Luluco
 {
     /// <summary>
@@ -24,5 +26,6 @@ namespace Luluco
         {
             InitializeComponent();
         }
+
     }
 }

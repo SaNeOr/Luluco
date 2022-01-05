@@ -10,14 +10,17 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="Theme/TextboxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/VariableTheme.xaml"/>
+                <ResourceDictionary Source="Theme/VariableTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="Theme/TemplateTextBoxTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
-                <view:HomeView/>
+            <DataTemplate DataType="{x:Type viewModel:TemplateModel}">
+                <view:TemplateView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewModel:DiscoverViewModel}">
-                <view:DiscoverView/>
+            <DataTemplate DataType="{x:Type viewModel:VariableViewModel}">
+                <view:VariableView/>
             </DataTemplate>
             
         </ResourceDictionary>

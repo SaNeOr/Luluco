@@ -8,7 +8,7 @@
         
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="500" Width="400"
+        Height="500" Width="800"
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
@@ -23,7 +23,7 @@
 
         <Grid Margin="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="400"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
@@ -46,7 +46,7 @@
                    FontSize="9"
                    VerticalAlignment="Center"/>
                 <Border HorizontalAlignment="Right" Background="White" Width="30"
-                        Margin="290,0,0,0"/>
+                        Margin="680,0,0,0"/>
                 <Border HorizontalAlignment="Right" Background="White" Width="30"
                         Margin="10,0,0,0"/>
             </StackPanel>
@@ -57,13 +57,14 @@
             <StackPanel Orientation="Vertical">
                 <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
                     <Label  Content="TemplatePath:" Width="100"/>
-                    <TextBlock Background="White" Width="200"/>
+                    <TextBlock Background="White" Width="500"/>
                 </StackPanel>
                     <StackPanel Orientation="Horizontal"  Margin="0,2,0,2">
                     <Label Content="ExportPath:" Width="100"/>
-                    <TextBlock Background="White" Width="200"/>
+                    <TextBlock Background="White" Width="500"/>
                 </StackPanel>
             </StackPanel>
+                <Button Content="Button" Margin="20,2,0,2" Width="70"/>
                 <Button Content="Button" Margin="20,2,0,2" Width="70"/>
             </StackPanel>
 
@@ -76,34 +77,45 @@
                        FontSize="18"
                        Margin="15,5,0,0" Height="28" Width="90"/>
             </StackPanel>
-            <StackPanel Grid.Row="3"
+
+            <StackPanel Grid.Row="3" Grid.RowSpan="2"
+                        Background="#9bd8ef">
+                <ContentControl
+                            Content="{Binding VariableVM}"/>
+            </StackPanel>
+            <!--<StackPanel Grid.Row="3"
                         Background="#9bd8ef">
                 <Label>Keywords:</Label>
-                
+                <RadioButton Content="InsertBefore"
+                             Height="50"
+                             Foreground="White"
+                             FontSize="14"
+                             Style="{StaticResource MenuButtonTheme}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="4"
                         Background="#9bd8ef">
+                <Label>Others:</Label>
 
-                <RadioButton Content="Home"
+                <RadioButton Content="HeroID"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding HomeViewCommand}"/>
-                <RadioButton Content="Home2"
+                <RadioButton Content="HeroName"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding DiscoverViewCommand}"/>
 
-                <RadioButton Content="Home3"
+                <RadioButton Content="HeroRomajiName"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource MenuButtonTheme}"/>
-            </StackPanel>
+            </StackPanel>-->
 
             <!--<StackPanel Grid.Row="1" Grid.Column="1"
                         Background="#813f4c">
@@ -127,13 +139,14 @@
                         Background="#d9b28b">
                 <ContentControl Grid.Row="2"
                             Grid.Column="1"
-                            Margin="10,10,10,10"
-                            Content="{Binding CurrentView}"/>
+                            Content="{Binding TemplateVM}"/>
             </StackPanel>
 
             <Button Grid.Row="5"
-                    Grid.Column="0" Grid.ColumnSpan="2">
-                Apply</Button>
+                    Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,0,0,0"
+                    Content="Apply"/>
+
         </Grid>
     </Border>
 </Window>
