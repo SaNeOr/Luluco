@@ -55,4 +55,19 @@
     </Style>
 
 
+    <Style TargetType="{x:Type CheckBox}"
+           x:Key="TemplateCheckBox">
+        
+        <Style.Triggers>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter Property="Background" Value="Red" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="False">
+                <Setter Property="Background" Value="Transparent" />
+            </Trigger>
+        </Style.Triggers>
+        
+    </Style>
+    
+
 </ResourceDictionary>

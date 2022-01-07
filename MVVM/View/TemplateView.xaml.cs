@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Luluco.Core;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,15 @@ namespace Luluco.MVVM.View
         public TemplateView()
         {
             InitializeComponent();
+        }
+
+        private void CollectionViewSource_Filter_CustomerVariable(object sender, FilterEventArgs e)
+        {
+            LulucoPair CustomerVariable = e.Item as LulucoPair;
+            if (CustomerVariable != null)
+            {
+                e.Accepted = !LulucoKeyWord.AllKeyWords.Contains(CustomerVariable.Key);
+            }
         }
     }
 }

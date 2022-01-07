@@ -3,9 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Luluco"
              xmlns:viewModel="clr-namespace:Luluco.MVVM.ViewModel"
-             xmlns:view="clr-namespace:Luluco.MVVM.View"
+             xmlns:view="clr-namespace:Luluco.MVVM.View" xmlns:System="clr-namespace:System;assembly=System.Runtime"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MenuButtonTheme.xaml"/>
@@ -22,7 +23,9 @@
             <DataTemplate DataType="{x:Type viewModel:VariableViewModel}">
                 <view:VariableView/>
             </DataTemplate>
-            
+
+            <System:Double x:Key="WindowWidth">800</System:Double>
+            <System:Double x:Key="WindowHeight">800</System:Double>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

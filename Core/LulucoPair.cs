@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Luluco.MVVM.ViewModel
+namespace Luluco.Core
 {
-    class LulucoDict
+    class LulucoPair
     {
         public string Key { get; set; }
         public string Value { get; set; }
+
+        public bool IsDisable { get; set; }
     }
+
 }

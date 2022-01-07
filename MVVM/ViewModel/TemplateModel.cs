@@ -11,13 +11,18 @@ namespace Luluco.MVVM.ViewModel
 {
     class TemplateModel: ObservableObject
     {
-        private ObservableCollection<LulucoDict> _templateDict = new ObservableCollection<LulucoDict>();
-        public ObservableCollection<LulucoDict> TemplateDict => _templateDict;
+        private ObservableCollection<LulucoPair> _templateDict = new ObservableCollection<LulucoPair>();
+        public ObservableCollection<LulucoPair> TemplateDict => _templateDict;
+
 
         public void LoadData()
         {
-            string filePath = PathManager.TemplateConfigPath;
-
+            string filePath = LulucoPath.TemplateConfigPath;
+            if (!File.Exists(filePath))
+            {
+                return;
+            }
+            _templateDict.Clear();
             StreamReader streamReaderMain = new StreamReader(filePath, Encoding.UTF8);
             string jsonText = streamReaderMain.ReadToEnd();
             JsonTextReader reader = new JsonTextReader(new StringReader(jsonText));
@@ -25,9 +30,8 @@ namespace Luluco.MVVM.ViewModel
 
             foreach (var item in jObject)
             {
-                _templateDict.Add(new LulucoDict { Key = $"{item.Key}", Value = $"{item.Value}" });
+                _templateDict.Add(new LulucoPair { Key = $"{item.Key}", Value = $"{item.Value}" });
             }
-
         }
 
     }

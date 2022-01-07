@@ -13,7 +13,7 @@
                         <StackPanel Orientation="Horizontal" >
                             <Rectangle StrokeThickness="1"/>
                             <Label Margin="1"
-                                   Width="200"
+                                   Width="300"
                                      Content="{TemplateBinding Text}"
                                      BorderThickness="0"
                                      Background="Transparent"
@@ -24,7 +24,7 @@
 
                             <Border CornerRadius="10"
                                     Background="White"
-                                    Width="200"
+                                    Width="300"
                                     Height="30">
                                 <TextBox Margin="1"
                                      Text="{TemplateBinding Text}"

@@ -8,64 +8,74 @@
         
         mc:Ignorable="d"
         Title="MainWindow" 
-        Height="500" Width="800"
+        Height="{DynamicResource WindowHeight }"  Width="{DynamicResource WindowWidth}"
         WindowStyle="None"
-        ResizeMode="NoResize"
+        ResizeMode="CanResizeWithGrip"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+    xmlns:System="clr-namespace:System;assembly=System.Runtime">
 
     <Window.DataContext>
         <viewModel:MainViewModel/>
     </Window.DataContext>
+
+
+    <Window.Resources>
+        <CollectionViewSource x:Name="VariableKeyWordVariableName" x:Key="VariableKeywordVariable"   Source="{Binding VariableVM.Variabledict}" Filter="CollectionViewSource_Filter_Variable_KeywordVariable"/>
+        <CollectionViewSource x:Name="VariableCustomerVariableName" x:Key="VariableCustomerVariable" Source="{Binding VariableVM.Variabledict}" Filter="CollectionViewSource_Filter_Variable_CustomerVariable"/>
+
+        <CollectionViewSource x:Name="TemplateCustomerWordVariableName" x:Key="TemplateCustomerwordVariable"   Source="{Binding TemplateVM.TemplateDict}" Filter="CollectionViewSource_Filter_Templte_CustomerVariable"/>
+
+    </Window.Resources>
 
     <Border Background="#f62275"
             CornerRadius="10">
 
         <Grid Margin="3">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="400"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="20"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition/>
-                <RowDefinition Height="50"/>
+                <RowDefinition Height="21*"/>
+                <RowDefinition Height="66*"/>
+                <RowDefinition Height="37*"/>
+                <RowDefinition Height="103*"/>
+                <RowDefinition Height="515*"/>
+                <RowDefinition Height="52*"/>
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal"
                         Grid.Column="0" Grid.ColumnSpan="2" 
                         Grid.Row="0">
-            <Label 
+                <Label 
                 
                    Foreground="White" 
                    Content="Luluco" 
                    FontSize="9"
                    VerticalAlignment="Center"/>
-                <Border HorizontalAlignment="Right" Background="White" Width="30"
-                        Margin="680,0,0,0"/>
-                <Border HorizontalAlignment="Right" Background="White" Width="30"
-                        Margin="10,0,0,0"/>
+                <Button HorizontalAlignment="Right" Background="White" Width="30"
+                        Margin="680,0,0,0"  Click="Button_Click_Minimize"/>
+                <Button HorizontalAlignment="Right" Background="White" Width="30"
+                        Margin="10,0,0,0" Click="Button_Click_CloseApp"/>
             </StackPanel>
 
 
             <StackPanel Background="#fdf97b"
-                Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-            <StackPanel Orientation="Vertical">
-                <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
-                    <Label  Content="TemplatePath:" Width="100"/>
-                    <TextBlock Background="White" Width="500"/>
+                Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,0,5">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal" Margin="0,2,0,2">
+                        <Label  Content="TemplatePath:" Width="100"/>
+                        <TextBox x:Name="TemplatePath" Background="White" Width="500"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"  Margin="0,2,0,0">
+                        <Label Content="ExportPath:" Width="100"/>
+                        <TextBox x:Name="ExportPath" Background="White" Width="500"/>
+                    </StackPanel>
                 </StackPanel>
-                    <StackPanel Orientation="Horizontal"  Margin="0,2,0,2">
-                    <Label Content="ExportPath:" Width="100"/>
-                    <TextBlock Background="White" Width="500"/>
-                </StackPanel>
-            </StackPanel>
-                <Button Content="Button" Margin="20,2,0,2" Width="70"/>
-                <Button Content="Button" Margin="20,2,0,2" Width="70"/>
+                <Button Content="Read" Margin="20,2,0,2" Width="70" Click="Button_Click_Read"/>
+                <Button Content="Save" Margin="20,2,0,2" Width="70" Click="Button_Click_Save"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2"
@@ -80,8 +90,50 @@
 
             <StackPanel Grid.Row="3" Grid.RowSpan="2"
                         Background="#9bd8ef">
-                <ContentControl
-                            Content="{Binding VariableVM}"/>
+                <StackPanel HorizontalAlignment="Left">
+                    <StackPanel>
+                        <Label>Keywords:</Label>
+                        <ListBox x:Name="ListBox_KeyWordVariable" Background="Transparent"
+                ItemsSource="{Binding Source={StaticResource  VariableKeywordVariable}}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBox Background="Transparent" Text="{Binding Key, Mode=TwoWay}" Style="{StaticResource VariableTextBox4Key  }"/>
+                                        <TextBox Background="Transparent" Text="{Binding Value, Mode=TwoWay}"  Style="{StaticResource VariableTextBox4Value  }"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+
+
+                    <ScrollViewer Height="580" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="OtherVariables" Height="580" >
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <Label HorizontalAlignment="Left">Others:</Label>
+                                <Button
+                            Margin="300,0,0,0"
+                            Width="30"
+                            Content=" + "
+                            Click="Button_Click_Variable_Add" HorizontalContentAlignment="Center" HorizontalAlignment="Right"
+                            />
+                            </StackPanel>
+                            <ListBox x:Name="ListBox_CustomVariable" Background="Transparent"
+                ItemsSource="{Binding Source={StaticResource VariableCustomerVariable}}" Margin="0,5,0,0">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox Background="Transparent" Text="{Binding Key, Mode=TwoWay}" Style="{StaticResource VariableTextBox4Key  }"/>
+                                            <TextBox Background="Transparent" Text="{Binding Value, Mode=TwoWay}"  Style="{StaticResource VariableTextBox4Value  }"/>
+                                            <Button Margin="10,0,0,0" Width="45" Click="Button_Click_Variable_Delete"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </StackPanel>
             </StackPanel>
             <!--<StackPanel Grid.Row="3"
                         Background="#9bd8ef">
@@ -135,17 +187,34 @@
                        FontSize="18"
                        Margin="15,5,0,0" Height="28" Width="90"/>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.RowSpan="2" Grid.Column="1"
+            <StackPanel Grid.Row="3" Grid.RowSpan="2"  Grid.Column="1"
                         Background="#d9b28b">
-                <ContentControl Grid.Row="2"
-                            Grid.Column="1"
-                            Content="{Binding TemplateVM}"/>
+                <StackPanel HorizontalAlignment="Stretch" Margin="0,0,0,110">
+                    <ScrollViewer Height="680" VerticalScrollBarVisibility="Auto"  HorizontalScrollBarVisibility="Hidden">
+                        <StackPanel x:Name="StackPanel_Templates" Height="680">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Top">
+                                <Label HorizontalAlignment="Left">Others:</Label>
+                            </StackPanel>
+                            <ListBox x:Name="ListBox_Template" Background="Transparent"
+                                        ItemsSource="{Binding Source={StaticResource TemplateCustomerwordVariable}}" Height="740">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox Background="Transparent" Text="{Binding Key, Mode=TwoWay}" Style="{StaticResource TemplateTextBox4Key  }"/>
+                                            <TextBox Background="Transparent" Text="{Binding Value, Mode=TwoWay}"  Style="{StaticResource TemplateTextBox4Value  }"/>
+                                            <CheckBox IsChecked="{Binding IsDisable, Mode=TwoWay}"  Style="{StaticResource TemplateCheckBox}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </ScrollViewer>
+                </StackPanel>
             </StackPanel>
 
             <Button Grid.Row="5"
                     Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="0,0,0,0"
-                    Content="Apply"/>
+                    Content="Apply" Click="Button_Click_Apply"/>
 
         </Grid>
     </Border>

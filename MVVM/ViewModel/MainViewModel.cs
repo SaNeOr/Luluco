@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Luluco.MVVM.ViewModel
 {
-    class MainViewModel: ObservableObject
+    partial class MainViewModel: ObservableObject
     {
+
         public RelayCommands TemplateViewCommand { get; set; }
         public RelayCommands VariableViewCommand { get; set; }
 
@@ -28,23 +29,14 @@ namespace Luluco.MVVM.ViewModel
         {
             TemplateVM = new TemplateModel();
             VariableVM = new VariableViewModel();
-
-            VariableVM.LoadData();
-            TemplateVM.LoadData();
-            //CurrentView = HomeVM;
-
-            //TemplateViewCommand = new RelayCommands(o => 
-            //{
-            //    CurrentView = HomeVM;
-            //});
-
-            //VariableViewCommand = new RelayCommands(o =>
-            //{
-            //    CurrentView = DiscoverVM;
-            //});
-
-
-
+            //LoadData();
         }
+
+        public void LoadData()
+        {
+            TemplateVM.LoadData();
+            VariableVM.LoadData();
+        }
+
     }
 }
